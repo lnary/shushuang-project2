@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>shuang-project-web</artifactId>
+        <groupId>com.mote</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>shuang-project-web-backend</artifactId>
+    <packaging>war</packaging>
+
+<dependencies>
+<!-- 为什么一定要加上实现类  才能找到bean -->
+    <dependency>
+        <groupId>com.mote</groupId>
+        <artifactId>shuang-project-service</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+</dependencies>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.mortbay.jetty</groupId>
+                    <artifactId>jetty-maven-plugin</artifactId>
+                    <version>8.1.5.v20120716</version>
+                    <configuration> <stopKey>stop</stopKey>
+                        <stopPort>9999</stopPort>
+                        <scanIntervalSeconds>1</scanIntervalSeconds>
+                        <contextXml>${project.basedir}/src/test/resources/jetty-context.xml</contextXml>
+                        <webApp>
+                            <contextPath>/</contextPath>
+                        </webApp>
+                        <webAppSourceDirectory>web</webAppSourceDirectory>
+                        <webAppConfig>
+                            <contextPath>/</contextPath>
+                        </webAppConfig>
+                        <connectors> <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <port>8080</port> <maxIdleTime>60000</maxIdleTime> </connector> </connectors>
+                    </configuration> </plugin>
+            </plugins>
+        </pluginManagement>
+
+      <!--  <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>-->
+    </build>
+
+</project>
